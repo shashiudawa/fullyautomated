@@ -1,7 +1,7 @@
 pipeline {
   environment {
-    registry = 'https://hub.docker.com/repository/docker/shashiudawa6022/test_tomcat'
-    registryCredential = dockerregistry
+    registry = "https://hub.docker.com/repository/docker/shashiudawa6022/test_tomcat"
+    rxegistryCreidential = 'dockerregistry'
   }
   agent any
   stages {
