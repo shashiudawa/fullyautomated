@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "https://hub.docker.com/repository/docker/shashiudawa6022/test_tomcat"
+    registry = "https://hub.docker.com"
     registryCredential = 'dockerregistry'
   }
   agent any
@@ -8,12 +8,13 @@ pipeline {
     stage('build') {
       steps {
         sh 'mvn clean package'
+        sh "docker build . -t shashiudawa6022/jenkins:${env.BUILD_ID}"
       }
     }
     stage('publish') {
       steps {
-        script {
-          docker.build registry + ":${env.BUILD_ID}"
+        withDockerRegistry([ credentialsId: "$registryCredential", url: "$registry" ]) {
+          sh 'docker push shashiudawa6022/jenkins:${env.BUILD_ID}'
         }
       }
     }
