@@ -13,8 +13,9 @@ pipeline {
     }
     stage('publish') {
       steps {
-        withDockerRegistry([ credentialsId: "$dockerregistry", url: "$registry" ]) 
+        withDockerRegistry([ credentialsId: "$dockerregistry", url: "$registry" ]) {
           sh 'docker push tomcatwebapp:${env.BUILD_ID}'
+        }
       }
     }
   }
