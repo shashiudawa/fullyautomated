@@ -14,7 +14,7 @@ pipeline {
     stage('publish') {
       steps {
         withDockerRegistry([ credentialsId: "$registryCredential", url: "$registry" ]) {
-          sh 'docker push shashiudawa6022/jenkins:${env.BUILD_ID}'
+          sh "docker push shashiudawa6022/jenkins:${env.BUILD_ID}"
         }
       }
     }
