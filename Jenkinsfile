@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = "https://hub.docker.com/repository/docker/shashiudawa6022/test_tomcat"
-    rxegistryCreidential = 'dockerregistry'
+    registryCredential = 'dockerregistry'
   }
   agent any
   stages {
@@ -13,7 +13,7 @@ pipeline {
     }
     stage('publish') {
       steps {
-        withDockerRegistry([ credentialsId: "$dockerregistry", url: "$registry" ]) {
+        withDockerRegistry([ credentialsId: "$registryCredintial", url: "$registry" ]) {
           sh 'docker push tomcatwebapp:${env.BUILD_ID}'
         }
       }
